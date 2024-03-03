@@ -1,0 +1,22 @@
+{
+  "name": "@roadiz/types",
+  "version": "0.1.0",
+  "description": "Roadiz Typescript type definitions",
+  "types": "./types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roadiz/types.git"
+  },
+  "keywords": [
+    "Roadiz",
+    "Typescript",
+    "types",
+    "defintions"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roadiz/types/issues"
+  },
+  "homepage": "https://github.com/roadiz/types#readme"
+}
