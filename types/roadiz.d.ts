@@ -165,6 +165,7 @@ export interface RoadizWebResponse extends JsonLdObject {
     breadcrumbs: RoadizBreadcrumbs
     realms?: Array<RoadizSecureRealm>
     hidingBlocks?: boolean
+    maxAge?: number // TTL in seconds
 }
 
 // depends on HTTP response format (application/json or application/ld+json)
