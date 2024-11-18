@@ -106,7 +106,7 @@ export interface RoadizAttributeTranslation {
     translation: RoadizTranslation
 }
 
-export interface RoadizWalker extends JsonLdObject {
+export interface RoadizWalker extends Omit<JsonLdObject, '@id'> {
     item: RoadizNodesSources
     children: Array<RoadizWalker>
 }
@@ -171,7 +171,7 @@ export interface RoadizWebResponse extends JsonLdObject {
 // depends on HTTP response format (application/json or application/ld+json)
 export type RoadizWebResponseBlocks = HydraCollection<RoadizWalker> | Array<Omit<RoadizWalker, keyof JsonLdObject>>
 
-export interface RoadizNodesSourcesHead extends JsonLdObject {
+export interface RoadizNodesSourcesHead extends Omit<JsonLdObject, '@id'> {
     siteName?: string | null
     metaTitle?: string | null
     metaDescription?: string | null
@@ -199,7 +199,7 @@ export interface RoadizWebResponseItem extends JsonLdObject {
     url: string
 }
 
-export interface RoadizBreadcrumbs extends JsonLdObject {
+export interface RoadizBreadcrumbs extends Omit<JsonLdObject, '@id'> {
     items: HydraCollection<JsonLdObject> | Array<unknown> // depends on HTTP response format (application/json or application/ld+json)
 }
 
