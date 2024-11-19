@@ -1,11 +1,14 @@
 {
   "name": "@roadiz/types",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Roadiz Typescript type definitions",
   "types": "./types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/roadiz/types.git"
+  },
+  "scripts": {
+    "release": "npx changelogen@latest --release && npm publish && git push --follow-tags"
   },
   "keywords": [
     "Roadiz",
