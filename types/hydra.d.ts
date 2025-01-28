@@ -8,9 +8,9 @@ import { JsonLdObject } from './jsonld'
  */
 
 export interface HydraCollection<T> extends JsonLdObject {
-    'hydra:member': Array<T>
-    'hydra:totalItems': number
-    'hydra:view': HydraView
+    'hydra:member'?: Array<T>
+    'hydra:totalItems'?: number
+    'hydra:view'?: HydraView
 }
 
 export type ArchivesHydraCollection = HydraCollection<RoadizEntityArchive>

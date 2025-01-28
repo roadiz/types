@@ -110,5 +110,5 @@ export interface RoadizRequestSearchParams extends RoadizRequestParams {
 }
 
 export interface RoadizRequestWebResponseParams extends RoadizRequestParams {
-    path: string
+    path?: string
 }
