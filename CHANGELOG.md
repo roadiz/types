@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.3.2
+
+[compare changes](https://github.com/roadiz/types/compare/v0.3.1...v0.3.2)
+
+### 🩹 Fixes
+
+- **roadiz:** Document image width / height as number ([85a242e](https://github.com/roadiz/types/commit/85a242e))
+
+### ❤️ Contributors
+
+- Manuel Odelain ([@manuelodelain](http://github.com/manuelodelain))
+
 ## v0.3.1
 
 [compare changes](https://github.com/roadiz/types/compare/v0.2.0...v0.3.1)
