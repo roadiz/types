@@ -119,8 +119,8 @@ export interface RoadizDocument extends JsonLdObject {
     embedPlatform?: string // Only for external documents (Youtube, Vimeo, …)
     mimeType?: string
     type?: string // mimeType short version
-    imageWidth?: string // Only for processable documents, i.e. images
-    imageHeight?: string // Only for processable documents, i.e. images
+    imageWidth?: number // Only for processable documents, i.e. images
+    imageHeight?: number // Only for processable documents, i.e. images
     imageAverageColor?: string // Only for processable documents, i.e. images
     imageCropAlignment?:
         | 'top-left'
