@@ -6,51 +6,50 @@
 import { JsonLdObject } from './jsonld'
 import { HydraCollection } from './hydra'
 
-export interface RoadizNodeType {
+export interface RoadizNode extends JsonLdObject {
+    attributeValues?: Array<Omit<RoadizAttributeValue, 'node'>>
+    childrenOrder?: 'position' | 'nodeName' | 'createdAt' | 'updatedAt' | 'ns.publishedAt'
+    childrenOrderDirection?: 'ASC' | 'DESC'
+    home?: boolean
+    nodeName?: string
+    nodeTypeName?: string
+    position?: number
+    status?: number
+    tags?: Array<RoadizTag>
+    visible?: boolean
+}
+
+export interface RoadizTranslation extends JsonLdObject {
+    available?: boolean
+    defaultTranslation?: boolean
+    locale?: string // ISO 2-letter language code (fr, en, de).
     name?: string
 }
 
-export interface RoadizNode extends JsonLdObject {
-    nodeName?: string
-    home?: boolean
-    visible?: boolean
-    status?: number
-    position?: number
-    childrenOrder?: 'position' | 'nodeName' | 'createdAt' | 'updatedAt' | 'ns.publishedAt'
-    childrenOrderDirection?: 'ASC' | 'DESC'
-    nodeType?: RoadizNodeType
-    tags?: Array<RoadizTag>
-    attributeValues?: Array<Omit<RoadizAttributeValue, 'node'>>
-}
-
-export interface RoadizTranslation {
-    locale?: string // ISO 2-letter language code (fr, en, de).
-}
-
 export interface RoadizSecureRealm extends JsonLdObject {
-    type?: 'plain_password' | 'bearer_role' | 'bearer_user'
-    behaviour?: 'none' | 'deny' | 'hide_blocks'
     // Defines how frontend should pass credentials to API:
     // - PasswordQuery: pass `?password=xxxxx` in query-string
     // - Bearer: use standard `Authentication: Bearer xxxxxx` HTTP header
     authenticationScheme?: 'PasswordQuery' | 'Bearer'
+    behaviour?: 'none' | 'deny' | 'hide_blocks'
     name?: string
+    type?: 'plain_password' | 'bearer_role' | 'bearer_user'
 }
 
 export interface RoadizNodesSources extends JsonLdObject {
-    node?: Omit<RoadizNode, 'home' | 'nodeType' | 'status'>
-    translation?: RoadizTranslation
-    slug?: string // First urlAlias OR node.nodeName
-    title?: string
-    publishedAt?: string // ISO publication DateTime
-    url?: string // Reachable nodes-sources URL
-    metaTitle?: string
-    metaDescription?: string
-    noIndex?: boolean
-    urlAliases?: Array<RoadizUrlAlias>
     listingSortOptions?: {
         [key: string]: 'ASC' | 'DESC'
     }
+    metaDescription?: string
+    metaTitle?: string
+    noIndex?: boolean
+    node?: Omit<RoadizNode, 'home' | 'nodeTypeName' | 'status' | 'position'>
+    publishedAt?: string // ISO publication DateTime
+    slug?: string // First urlAlias OR node.nodeName
+    title?: string
+    translation?: RoadizTranslation
+    url?: string // Reachable nodes-sources URL
+    urlAliases?: Array<RoadizUrlAlias>
 }
 
 export interface RoadizSearchHighlighting {
@@ -63,8 +62,8 @@ export interface RoadizSearchHighlighting {
 }
 
 export interface RoadizSearchResultItem {
-    nodeSource?: RoadizNodesSources
     highlighting?: RoadizSearchHighlighting
+    nodeSource?: RoadizNodesSources
 }
 
 export interface RoadizArchivesYear {
@@ -76,29 +75,29 @@ export interface RoadizUrlAlias {
 }
 
 export interface RoadizTag extends JsonLdObject {
-    name?: string
     color?: string
+    documents?: Array<RoadizDocument>
+    name?: string
+    parent?: RoadizTag
     slug?: string
     visible?: boolean
-    documents?: Array<RoadizDocument>
-    parent?: RoadizTag
 }
 
 export interface RoadizAttributeValue extends JsonLdObject {
+    code?: string
+    color?: string | null
+    documents?: Array<RoadizDocument>
+    label?: string
     node?: string
     position?: number
     type?: number
-    code?: string
-    color?: string | null
-    label?: string
     value?: string | number | boolean | null
-    documents?: Array<RoadizDocument>
 }
 
 export interface RoadizAttribute {
-    documents?: Array<RoadizDocument>
-    code?: string
     attributeTranslations: Array<RoadizAttributeTranslation>
+    code?: string
+    documents?: Array<RoadizDocument>
 }
 
 export interface RoadizAttributeTranslation {
@@ -107,20 +106,21 @@ export interface RoadizAttributeTranslation {
 }
 
 export interface RoadizWalker extends Omit<JsonLdObject, '@id'> {
-    item?: RoadizNodesSources
     children?: Array<RoadizWalker>
+    item?: RoadizNodesSources
 }
 
 export interface RoadizDocument extends JsonLdObject {
-    processable?: boolean // True if document can be processed by an image optimizer
-    relativePath?: string
     alt?: string
+    altSources?: Array<RoadizDocument> // Only for native video and audio documents
+    copyright?: string
+    description?: string
     embedId?: string // Only for external documents (Youtube, Vimeo, …)
     embedPlatform?: string // Only for external documents (Youtube, Vimeo, …)
-    mimeType?: string
-    type?: string // mimeType short version
-    imageWidth?: number // Only for processable documents, i.e. images
-    imageHeight?: number // Only for processable documents, i.e. images
+    externalUrl?: string
+    filename?: string
+    filesize?: string
+    folders?: Array<RoadizFolder>
     imageAverageColor?: string // Only for processable documents, i.e. images
     imageCropAlignment?:
         | 'top-left'
@@ -132,64 +132,64 @@ export interface RoadizDocument extends JsonLdObject {
         | 'bottom-left'
         | 'bottom'
         | 'bottom-right' // Only for processable documents, i.e. images
-    filename?: string
-    filesize?: string
-    thumbnail?: RoadizDocument // Only for none displayable documents, i.e. PDFs
-    copyright?: string
-    externalUrl?: string
-    name?: string
-    description?: string
-    publicUrl?: string // Only for none processable documents, i.e. PDFs, SVG
+    imageHeight?: number // Only for processable documents, i.e. images
+    imageWidth?: number // Only for processable documents, i.e. images
     mediaDuration?: number
-    folders?: Array<RoadizFolder>
+    mimeType?: string
+    name?: string
     private?: boolean
-    altSources?: Array<RoadizDocument> // Only for native video and audio documents
+    processable?: boolean // True if document can be processed by an image optimizer
+    publicUrl?: string // Only for none processable documents, i.e. PDFs, SVG
+    rawRelativePath?: string // Only available if document has a raw file and `document_raw_relative_path` serialization group is used
+    relativePath?: string
+    thumbnail?: RoadizDocument // Only for none displayable documents, i.e. PDFs
+    type?: string // mimeType short version
 }
 
 export interface RoadizFolder extends JsonLdObject {
-    slug?: string
     name?: string
+    slug?: string
     visible?: boolean
 }
 
 export interface RoadizAlternateLink {
-    url?: string
-    title?: string
     locale?: string
+    title?: string
+    url?: string
 }
 
 export interface RoadizWebResponse extends JsonLdObject {
-    head?: RoadizWebResponseHead
-    item?: RoadizWebResponseItem
     blocks?: RoadizWebResponseBlocks
     breadcrumbs?: RoadizBreadcrumbs
-    realms?: Array<RoadizSecureRealm>
+    head?: RoadizWebResponseHead
     hidingBlocks?: boolean
+    item?: RoadizWebResponseItem
     maxAge?: number // TTL in seconds
+    realms?: Array<RoadizSecureRealm>
 }
 
 // depends on HTTP response format (application/json or application/ld+json)
 export type RoadizWebResponseBlocks = HydraCollection<RoadizWalker> | Array<Omit<RoadizWalker, keyof JsonLdObject>>
 
 export interface RoadizNodesSourcesHead extends Omit<JsonLdObject, '@id'> {
-    siteName?: string | null
-    metaTitle?: string | null
-    metaDescription?: string | null
-    policyUrl?: string | null
-    homePageUrl?: string | null
-    shareImage?: RoadizDocument | null
     facebookUrl?: string | null
-    twitterUrl?: string | null
-    linkedinUrl?: string | null
-    instagramUrl?: string | null
-    youtubeUrl?: string | null
-    noIndex?: boolean
     googleAnalytics?: string | null
     googleTagManager?: string | null
-    matomoUrl?: string | null
+    homePageUrl?: string | null
+    instagramUrl?: string | null
+    linkedinUrl?: string | null
+    mainColor?: string | null
     matomoSiteId?: string | null
     matomoTagManager?: string | null
-    mainColor?: string | null
+    matomoUrl?: string | null
+    metaDescription?: string | null
+    metaTitle?: string | null
+    noIndex?: boolean
+    policyUrl?: string | null
+    shareImage?: RoadizDocument | null
+    siteName?: string | null
+    twitterUrl?: string | null
+    youtubeUrl?: string | null
 }
 
 // TODO: add generic for Events API to augment this interface?
@@ -209,8 +209,8 @@ export interface RoadizBreadcrumbs extends Omit<JsonLdObject, '@id'> {
  * @see RoadizApi.getArchivesForType()
  */
 export interface RoadizEntityArchive extends JsonLdObject {
-    year?: number
     months?: Record<string, string>
+    year?: number
 }
 
 /*
@@ -224,15 +224,15 @@ export interface RoadizEntityArchive extends JsonLdObject {
  * JWT scopes.
  */
 export interface RoadizUserOutput extends JsonLdObject {
-    identifier: string // email or username: identifier used for login
-    roles?: string[]
+    birthday?: string | null
+    company?: string | null
+    emailValidated?: boolean
     firstName?: string | null
+    identifier: string // email or username: identifier used for login
+    job?: string | null
     lastName?: string | null
     phone?: string | null
-    company?: string | null
-    job?: string | null
-    birthday?: string | null
-    emailValidated?: boolean
+    roles?: string[]
 }
 
 /*
@@ -242,15 +242,15 @@ export interface RoadizUserOutput extends JsonLdObject {
  * plain password.
  */
 export interface RoadizUserInput {
-    email: string
-    plainPassword: string
-    firstName?: string | null
-    lastName?: string | null
-    phone?: string | null
-    company?: string | null
-    job?: string | null
     birthday?: string | null
+    company?: string | null
+    email: string
+    firstName?: string | null
+    job?: string | null
+    lastName?: string | null
     metadata?: unknown
+    phone?: string | null
+    plainPassword: string
 }
 
 /*
@@ -263,8 +263,8 @@ export interface RoadizUserPasswordRequest {
     identifier: string
 }
 export interface RoadizUserPasswordReset {
-    token: string
     plainPassword: string
+    token: string
 }
 
 /*

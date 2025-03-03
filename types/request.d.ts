@@ -31,7 +31,7 @@ export interface RoadizRequestNSParams extends RoadizRequestParams {
     }
     not?: {
         'node.nodesTags.tag.tagName'?: Array<string> | string
-        'node.nodeType.name'?: Array<string> | string
+        'node.nodeTypeName'?: Array<string> | string
         'node.id'?: Array<string> | string
     }
     'node.parent'?: string | number
@@ -39,9 +39,9 @@ export interface RoadizRequestNSParams extends RoadizRequestParams {
     'node.home'?: boolean
     'translation.id'?: string | Array<string>
     'translation.locale'?: string | Array<string>
-    'node.nodeType'?: string | Array<string>
-    'node.nodeType.reachable'?: boolean
-    'node.nodeType.publishable'?: boolean
+    'node.nodeTypeName'?: Array<string> | string
+    'reachable'?: boolean
+    'publishable'?: boolean
     'node.aNodes.nodeA'?: string | number
     'node.bNodes.nodeB'?: string | number
     'node.aNodes.field.name'?: string
@@ -55,8 +55,7 @@ export interface RoadizRequestAttributeValuesParams extends RoadizRequestParams 
     node?: string | Array<string>
     'node.id'?: number | Array<number>
     'node.nodeName'?: string | Array<string>
-    'node.nodeType'?: string | Array<string>
-    'node.nodeType.name'?: string | Array<string>
+    'node.nodeTypeName'?: string | Array<string>
     'node.visible'?: boolean
     'attribute.code'?: string | Array<string>
     'attribute.type'?: number | Array<number>
@@ -79,13 +78,12 @@ export interface RoadizRequestTagsParams extends RoadizRequestParams {
     tagName?: string
     'parent.id'?: string | Array<string>
     'parent.tagName'?: string | Array<string>
-    'nodesTags.node.visible'?: boolean
     'nodesTags.node'?: string | Array<string>
     'nodesTags.node.nodeName'?: string | Array<string>
-    'nodesTags.node.nodeType'?: string | Array<string>
-    'nodesTags.node.nodeType.name'?: string | Array<string>
-    'nodesTags.node.nodeType.reachable'?: boolean
+    'nodesTags.node.nodeTypeName'?: string | Array<string>
     'nodesTags.node.parent.nodeName'?: string | Array<string>
+    'nodesTags.node.nodesTags.tag.tagName'?: string | Array<string>
+    'nodesTags.node.visible'?: boolean
     visible?: boolean
     locked?: boolean
 }
