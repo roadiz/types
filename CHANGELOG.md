@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.4.0
+
+[compare changes](https://github.com/roadiz/types/compare/v0.3.2...v0.4.0)
+
+### 🚀 Enhancements
+
+- Removed any node.nodeType in favor of node.nodeTypeName, added new Document optional rawRelativePath, sorted properties ([#2](https://github.com/roadiz/types/pull/2))
+
+### ❤️ Contributors
+
+- Ambroise Maupate <ambroise@rezo-zero.com>
 
 ## v0.3.2
 
