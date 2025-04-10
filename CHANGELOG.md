@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.4.1
+
+[compare changes](https://github.com/roadiz/types/compare/v0.4.0...v0.4.1)
+
+### 🚀 Enhancements
+
+- Add tiktokUrl for RoadizNodesSourcesHead ([a598c7a](https://github.com/roadiz/types/commit/a598c7a))
+
+### 🏡 Chore
+
+- Update changelog ([cb03d9f](https://github.com/roadiz/types/commit/cb03d9f))
+
+### ❤️ Contributors
+
+- Julientison <julientison@rezo-zero.com>
+- Manuel Odelain ([@manuelodelain](https://github.com/manuelodelain))
+
 ## v0.4.0
 
 [compare changes](https://github.com/roadiz/types/compare/v0.3.2...v0.4.0)
