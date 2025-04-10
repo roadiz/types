@@ -188,6 +188,7 @@ export interface RoadizNodesSourcesHead extends Omit<JsonLdObject, '@id'> {
     policyUrl?: string | null
     shareImage?: RoadizDocument | null
     siteName?: string | null
+    tiktokUrl?: string | null
     twitterUrl?: string | null
     youtubeUrl?: string | null
 }
