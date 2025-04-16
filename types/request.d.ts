@@ -78,12 +78,13 @@ export interface RoadizRequestTagsParams extends RoadizRequestParams {
     tagName?: string
     'parent.id'?: string | Array<string>
     'parent.tagName'?: string | Array<string>
-    'nodesTags.node'?: string | Array<string>
-    'nodesTags.node.nodeName'?: string | Array<string>
-    'nodesTags.node.nodeTypeName'?: string | Array<string>
-    'nodesTags.node.parent.nodeName'?: string | Array<string>
-    'nodesTags.node.nodesTags.tag.tagName'?: string | Array<string>
-    'nodesTags.node.visible'?: boolean
+    nodesTags?: {
+        nodeName?: string | Array<string>
+        nodeTypeName?: string | Array<string>
+        parentNodeName?: string | Array<string>
+        tagName?: string | Array<string>
+        visible?: boolean
+    }
     visible?: boolean
     locked?: boolean
 }
