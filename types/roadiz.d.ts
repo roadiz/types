@@ -121,6 +121,7 @@ export interface RoadizDocument extends JsonLdObject {
     filename?: string
     filesize?: string
     folders?: Array<RoadizFolder>
+    hotspot?: { x: number; y: number } // Only for processable documents, i.e. images
     imageAverageColor?: string // Only for processable documents, i.e. images
     imageCropAlignment?:
         | 'top-left'
