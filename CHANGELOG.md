@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.5.0
+
+[compare changes](https://github.com/roadiz/types/compare/v0.4.1...v0.5.0)
+
+### 🚀 Enhancements
+
+- ⚠️  Migrate tag params `nodesTags.xxx` to `nodesTags[]` for better performances and stability ([#3](https://github.com/roadiz/types/pull/3))
+- Add RoadizDocument hotspot property ([#4](https://github.com/roadiz/types/pull/4))
+
+#### ⚠️ Breaking Changes
+
+- ⚠️  Migrate tag params `nodesTags.xxx` to `nodesTags[]` for better performances and stability ([#3](https://github.com/roadiz/types/pull/3))
+
+### ❤️ Contributors
+
+- Ambroise Maupate <ambroise@rezo-zero.com>
+
 ## v0.4.1
 
 [compare changes](https://github.com/roadiz/types/compare/v0.4.0...v0.4.1)
